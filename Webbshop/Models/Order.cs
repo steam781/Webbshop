@@ -8,7 +8,7 @@ namespace MVCExampleProjekt.Models
 {
     public class Order
     {
-        public int Id { get; set; }
+        public int id { get; set; }
         public DateTime orderDate { get; set; }
 
         public Kund Customer { get; set; }
@@ -29,7 +29,7 @@ namespace MVCExampleProjekt.Models
                                    // en omgång per rad i databastabellen
             {
                 Order ord = new Order(); // Skapa ny objekt av typen Order
-                ord.Id = reader.GetInt32("id");  // hämta värde från kolumnen 'id'
+                ord.id = reader.GetInt32("id");  // hämta värde från kolumnen 'id'
                 ord.orderDate = reader.GetDateTime("orderDate");// hämta värde från kolumnen 'orderDate'
                 ord.orderStatus = reader.GetString("orderStatus");  // ...
 

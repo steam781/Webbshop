@@ -16,29 +16,33 @@
     @{
         <table>
             <tr>
-                <td>Username:</td>
-                <td>mail:</td>
-                <td>id:</td>
+                <td>Customer:</td>
+                <td>orderStatus:</td>
+                <td>orderDate:</td>
+                <td>purchasinglist:</td>
                 <td></td>
             </tr>
 
             @foreach (Order O in Model)
             {
 
-                //<tr>
-                //    <td>
-                //        <h3>@O.username</h3>
-                //    </td>
-                //    <td>
-                //        <h3>@O.mail</h3>
-                //    </td>
-                //    <td>
-                //        <h3>@O.id</h3>
-                //    </td>
-                //    <td>
-                //        @Html.ActionLink("Edit", "redigeraOrder", "Order", new {id = @O.id})
-                //    </td>
-                //</tr>
+                <tr>
+                    <td>
+                        <h3>@O.Customer</h3>
+                    </td>
+                    <td>
+                        <h3>@O.orderStatus</h3>
+                    </td>
+                    <td>
+                        <h3>@O.orderDate</h3>
+                    </td>
+                    <td>
+                        <h3>@O.purchasinglist</h3>
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "redigeraOrder", "Order", new {id = @O.id})
+                    </td>
+                </tr>
 
             }
         </table>
