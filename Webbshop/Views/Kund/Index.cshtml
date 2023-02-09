@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+    <style>
+                td{
+                    border:solid 1px black;
+                    padding:10px;
+                }
+    </style>
+@model List<Kund>
+<a class="nav-link" asp-area="" asp-controller="Kund" asp-action="newKund">läg till kund</a>
+<div id="kundList">
+    @{
+        <table>
+            <tr>
+                <td>Username:</td>
+                <td>mail:</td>
+                <td>id:</td>
+                <td></td>
+            </tr>
+
+            @foreach (Kund K in Model)
+            {
+                
+                <tr>
+                    <td>
+                        <h3>@K.username</h3>
+                    </td>
+                    <td>
+                        <h3>@K.mail</h3>
+                    </td>
+                    <td>
+                        <h3>@K.id</h3>
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "redigeraKund", "Kund", new {id = @K.id})
+                    </td>
+                </tr>
+                
+            }
+        </table>
+     }
+</div>

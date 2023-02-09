@@ -1,0 +1,109 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<style>
+    body {
+        background-image: url("../../images/Pyramid-scheme.png");
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    label {
+        width: 100px;
+        border: solid 1px;
+    }
+
+    #in {
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .field {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-size: 1.1rem;
+    }
+
+    .wrapper {
+        position: relative;
+    }
+
+    span {
+        position: absolute;
+        top: 6px;
+        right: 10px;
+    }
+
+    input {
+        background-color: rgba(14, 78, 72, 0.6);
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        border-radius: 4px;
+        padding: 4px;
+        outline: none;
+        color: wheat;
+        font-size: 1.1rem;
+        position: relative;
+        margin-top: 4px;
+    }
+
+    .Price::after {
+        content: "| KG";
+        position: absolute;
+        right: 3px;
+        top: 2px;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+
+@{
+    <form asp-action="sparanyProdukt" method="post">
+      
+        
+        <div id="in">
+            <label for="Name">name:</label>
+            <input type="text" id="produktnamn" name="produktnamn" placeholder="Product name">
+        </div>
+        <div id="in">
+            <label for="Supplier">Supplier:</label>
+            <input type="text" id="Supplier" name="tillverkare" placeholder="Product supplier">
+        </div>
+        <div id="in">
+            <label for="Info">Info:</label>
+            <input type="text" id="Info" name="produktinfo" placeholder="Product information">
+        </div>
+        <div id="in">
+            <label for="stock">Stock:</label>
+            <input type="number" id="stock" name="stock" placeholder="Product stock">
+        </div>
+        <div class="field">
+            <div class="wrapper">
+                <label for="Price">Price:</label>
+                <input type="text" id="Price" name="pris" class="Price" step="0.01" min="0" lang="en" placeholder="0,00">
+                <span>| kr</span>
+            </div>
+        </div>
+        <button type="submit">Confirm</button>
+    </form>
+}
