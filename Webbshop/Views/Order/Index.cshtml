@@ -11,12 +11,13 @@
     }
 </style>
 @model List<Order>
-<a class="nav-link" asp-area="" asp-controller="Kund" asp-action="newKund">läg till kund</a>
+<a class="nav-link" asp-area="" asp-controller="Kund" asp-action="newKund">läg till Produkt</a>
 <div id="kundList">
     @{
         <table>
             <tr>
-                <td>Customer:</td>
+                <td>id:</td>
+                <td>customer:</td>
                 <td>orderStatus:</td>
                 <td>orderDate:</td>
                 <td>purchasinglist:</td>
@@ -28,7 +29,10 @@
 
                 <tr>
                     <td>
-                        <h3>@O.Customer</h3>
+                        <h3>@O.id</h3>
+                    </td>
+                    <td>
+                        <h3>@O.customer.realname</h3>
                     </td>
                     <td>
                         <h3>@O.orderStatus</h3>
@@ -37,7 +41,17 @@
                         <h3>@O.orderDate</h3>
                     </td>
                     <td>
-                        <h3>@O.purchasinglist</h3>
+                        <div>
+                            <table>
+                                @foreach (Produkt P in O.purchasinglist){
+                                    <tr>
+                                        <td>@P.id</td>
+                                        <td>@P.produktnamn</td>
+                                        <td>@P.pris</td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "redigeraOrder", "Order", new {id = @O.id})
