@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using Webbshop.Models;
+using System.Security.Cryptography;
 
-namespace MVCExampleProjekt.Models
-{
+
     public class Order
     {
         public int id { get; set; }
@@ -21,17 +21,17 @@ namespace MVCExampleProjekt.Models
         {
             string conStr = "server=46.246.45.183;user=OliverEc;port=3306;database=OliverEc_DB;password=YROSBKEE";
             List<Order> orders = new List<Order>();
-            MySqlConnection conn = new MySqlConnection(conStr); // skapa förbindelse 'conn' till databasen
-            conn.Open(); // öppna kanal till databasen
-            MySqlCommand MyCom = new MySqlCommand("Select * from Orders", conn); // skapa sql-sats för 'conn'
-            MySqlDataReader reader = MyCom.ExecuteReader();  // skicka satsen till DB och spara svaret i 'reader'
-            while (reader.Read())  // while håller på tills ingen data kvar
-                                   // en omgång per rad i databastabellen
+            MySqlConnection conn = new MySqlConnection(conStr);
+            conn.Open();
+            MySqlCommand MyCom = new MySqlCommand("Select * from Orders", conn);
+            MySqlDataReader reader = MyCom.ExecuteReader(); 
+            while (reader.Read())
+                                   
             {
-                Order ord = new Order(); // Skapa ny objekt av typen Order
-                ord.id = reader.GetInt32("id");  // hämta värde från kolumnen 'id'
-                ord.orderDate = reader.GetDateTime("orderDate");// hämta värde från kolumnen 'orderDate'
-                ord.orderStatus = reader.GetString("orderStatus");  // ...
+                Order ord = new Order(); 
+                ord.id = reader.GetInt32("id");  
+                ord.orderDate = reader.GetDateTime("orderDate");
+                ord.orderStatus = reader.GetString("orderStatus");
 
                 int KundID = reader.GetInt32("id");
                 Kund k = Kund.getSingleKundById(KundID);
@@ -44,16 +44,74 @@ namespace MVCExampleProjekt.Models
                     prList.Add(Produkt.getSingleProduktById(int.Parse(pr)));
                 }
                 ord.purchasinglist = prList;
-                orders.Add(ord);                // spara objektet i listan 
+                orders.Add(ord);                
             }
 
-            MyCom.Dispose();  // släng förbindelse
-            conn.Close();  // stäng kanalen till DB
+            MyCom.Dispose();  
+            conn.Close();  
 
 
             return orders;
         }
-      //  public string Order getSingleOrderById(int id)
-        //{ }
+        public static Order getSingleOrderById(int id)
+        {
+            string conStr = "server=46.246.45.183;user=OliverEc;port=3306;database=OliverEc_DB;password=YROSBKEE";
+            List<Order> orders = new List<Order>();
+            MySqlConnection conn = new MySqlConnection(conStr);
+            conn.Open();
+            MySqlCommand MyCom = new MySqlCommand("Select * from Orders WHERE id = @ID", conn);
+            MyCom.Parameters.AddWithValue("@ID", id);
+            MySqlDataReader reader = MyCom.ExecuteReader();
+
+            Order singleO = new Order();
+            singleO.purchasinglist = new List<Produkt>(); 
+            if (reader.Read())
+            {
+                singleO.id = reader.GetInt32("id");
+                singleO.orderDate = reader.GetDateTime("orderDate");
+                singleO.orderStatus = reader.GetString("orderStatus");
+                string[] prId = reader.GetString("purchasinglist").Split(",");
+                foreach(string s in prId)
+                {
+                    Produkt p = Produkt.getSingleProduktById(int.Parse(s));
+                    singleO.purchasinglist.Add(p);
+                }
+
+            }
+            
+
+            MyCom.Dispose();
+            conn.Close();
+
+            return singleO;
+        }
+    public static void deleteProductInOrder(int orderID, int produktID)
+    {
+        string conStr = "server=46.246.45.183;user=OliverEc;port=3306;database=OliverEc_DB;password=YROSBKEE";
+        List<Order> orders = new List<Order>();
+        MySqlConnection conn = new MySqlConnection(conStr);
+        conn.Open();
+        MySqlCommand MyCom = new MySqlCommand("Select purchasinglist from Orders WHERE id = @ID", conn);
+        MyCom.Parameters.AddWithValue("@ID", orderID);
+        MySqlDataReader reader = MyCom.ExecuteReader();
+
+        reader.Read();
+        string l = reader.GetString("purchasinglist");
+        l = l.Replace(produktID + ",","");
+        l = l.Replace(produktID.ToString() , "");
+        MyCom.Dispose();
+        conn.Close();
+
+
+        conn = new MySqlConnection(conStr);
+        conn.Open();
+        MySqlCommand MyCom2 = new MySqlCommand("UPDATE Orders SET purchasinglist = @LIST WHERE id = @ID", conn);
+        MyCom2.Parameters.AddWithValue("@ID", orderID);
+        MyCom2.Parameters.AddWithValue("@LIST", l);
+        MyCom2.ExecuteNonQuery();
+
+        
+        MyCom2.Dispose();
+        conn.Close();
     }
 }
