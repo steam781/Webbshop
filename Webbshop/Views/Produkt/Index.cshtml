@@ -8,7 +8,7 @@
     }
 </style>
 @model List<Produkt>
-@Html.ActionLink("Add produkt", "newProdukt", "Produkt", new {})
+<a class="nav-link" asp-area="" asp-controller="Produkt" asp-action="newProdukt">läg till Produkt</a>
 <div id="ProduktList">
     @{
         <h1>@ViewBag.Meddelande</h1>

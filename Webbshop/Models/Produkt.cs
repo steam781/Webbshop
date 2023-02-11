@@ -104,7 +104,7 @@ namespace Webbshop.Models
             string conStr = "server=46.246.45.183;user=OliverEc;port=3306;database=OliverEc_DB;password=YROSBKEE";
 
             MySqlConnection conn = new MySqlConnection(conStr);
-            MySqlCommand MyCom = new MySqlCommand("INSERT INTO Produkt(produktnamn, produktinfo, stock, tillverkare, pris) VALUES (@PRNAMN, @TILL, @INFO, @STOCK, @PRIS)", conn);
+            MySqlCommand MyCom = new MySqlCommand("INSERT INTO Produkt(produktnamn, produktinfo, stock, tillverkare, pris) VALUES (@PRNAMN, @INFO, @STOCK, @TILL, @PRIS)", conn);
             MyCom.Parameters.AddWithValue("@PRNAMN", p.produktnamn);
             MyCom.Parameters.AddWithValue("@TILL", p.tillverkare);
             MyCom.Parameters.AddWithValue("@INFO", p.produktinfo);
