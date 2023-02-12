@@ -166,4 +166,30 @@ using System.Security.Cryptography;
 
 
     }
+    public static bool sparanyOrder(Order O, int produktID)
+    {
+
+        string conStr = "server=46.246.45.183;user=OliverEc;port=3306;database=OliverEc_DB;password=YROSBKEE";
+
+        MySqlConnection conn = new MySqlConnection(conStr);
+        MySqlCommand MyCom = new MySqlCommand("INSERT INTO Orders(orderDate, customer, orderStatus, purchasinglist) VALUES (@DATE, @CUSTOMER, @STATUS, @LIST)", conn);
+        MyCom.Parameters.AddWithValue("@DATE", O.orderDate);
+        MyCom.Parameters.AddWithValue("@CUSTOMER", O.customer);
+        MyCom.Parameters.AddWithValue("@STATUS", O.orderStatus);
+        MyCom.Parameters.AddWithValue("@LIST", O.purchasinglist);
+        conn.Open();
+
+        foreach (var produkt in O.purchasinglist)
+        {
+            produkt.stock--;
+        }
+
+        int rader = MyCom.ExecuteNonQuery();
+
+        MyCom.Dispose();
+        conn.Close();
+
+        if (rader == 0) return false; else return true;
+
+    }
 }

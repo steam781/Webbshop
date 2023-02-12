@@ -1,0 +1,153 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<style>
+    td {
+        border: solid 1px black;
+        padding: 10px;
+    }
+
+    #ProduktList {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top:200px;
+    }
+    body {
+        background-image: url("../../images/Pyramid-scheme.png");
+    }
+    button {
+        margin-top:40px;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    label {
+        width: 150px;
+        border: solid 1px;
+    }
+
+    #in {
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .field {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-size: 1.1rem;
+    }
+
+    .wrapper {
+        position: relative;
+    }
+
+    span {
+        position: absolute;
+        top: 6px;
+        right: 10px;
+    }
+
+    input {
+        background-color: rgba(14, 78, 72, 0.6);
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        border-radius: 4px;
+        padding: 4px;
+        outline: none;
+        color: wheat;
+        font-size: 1.1rem;
+        position: relative;
+        margin-top: 4px;
+        width: 200px;
+    }
+
+    .Price::after {
+        content: "| KG";
+        position: absolute;
+        right: 3px;
+        top: 2px;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+@model List<Produkt>
+@{
+    <form asp-action="sparanyOrder" method="post">
+        <div id="in">
+            <label for="customer">customer ID:</label>
+            <input type="number" id="customer" name="customer" required placeholder="customer id">
+        </div>
+        <div id="in">
+            <label for="orderStatus:">orderStatus:</label>
+            <input type="text" id="orderStatus" name="orderStatus" required placeholder="Status of order">
+        </div>
+        <div id="in">
+            <label for="orderDate">orderDate:</label>
+            <input type="date" id="orderDate" name="orderDate" required placeholder="Date of order">
+        </div>
+        <div id="in">
+            <label for="purchasinglist">purchasinglist:</label>
+            <input type="text" id="purchasinglist" name="purchasinglist" required placeholder="ex. 1,3 / product 1 and 3">
+        </div>
+        <button type="submit">Confirm</button>
+    </form>
+
+    <div id="ProduktList">
+        @{
+            <h1>@ViewBag.Meddelande</h1>
+            <table>
+                <tr>
+                    <td>Name:</td>
+                    <td>Info:</td>
+                    <td>Stock:</td>
+                    <td>price:</td>
+                    <td>id:</td>
+                </tr>
+
+                @foreach (Produkt P in Model)
+                {
+
+                    <tr>
+                        <td>
+                            @P.produktnamn
+                        </td>
+                        <td>
+                            @P.produktinfo (@P.tillverkare)
+                        </td>
+                        <td>
+                            @P.stock
+                        </td>
+                        <td>
+                            @P.pris
+                        </td>
+                        <td>
+                            @P.id
+                        </td>
+                    </tr>
+
+                }
+            </table>
+        }
+    </div>
+}

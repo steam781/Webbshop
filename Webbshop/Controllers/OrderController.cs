@@ -14,7 +14,7 @@ namespace Webbshop.Controllers
         }
         public IActionResult newOrder()
         {
-            return View();
+            return View(Produkt.getAllProdukt());
         }
         public IActionResult AdminRedigeraOrder(int id)
         {
@@ -45,18 +45,18 @@ namespace Webbshop.Controllers
             }
             return View("Index", Order.getAllOrder());
         }
-        //public IActionResult sparanyOrder(Order O)
-        //{
-        //    if (Order.sparanyOrder(O) == true)
-        //    {
-        //        ViewBag.Meddelande = "new order saved";
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Meddelande = "Action failed";
-        //    }
-        //    return View("Index", Order.getAllOrder());
-        //}
+        public IActionResult sparanyOrder(Order O, int produktID)
+        {
+            if (Order.sparanyOrder(O, produktID) == true)
+            {
+                ViewBag.Meddelande = "new order saved";
+            }
+            else
+            {
+                ViewBag.Meddelande = "Action failed";
+            }
+            return View("Index", Order.getAllOrder());
+        }
         //public IActionResult deleteOrder(Order O)
         //{
         //    if (Order.deleteOrder(O) == true)
