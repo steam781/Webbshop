@@ -1,50 +1,115 @@
-﻿@model Webbshop.Models.Kund
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<style>
+    body {
+        background-image: url("../../images/Pyramid-scheme.png");
+    }
 
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    label {
+        width: 150px;
+        border: solid 1px;
+    }
+
+    #in {
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .field {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-size: 1.1rem;
+    }
+
+    .wrapper {
+        position: relative;
+    }
+
+    span {
+        position: absolute;
+        top: 6px;
+        right: 10px;
+    }
+
+    input {
+        background-color: rgba(14, 78, 72, 0.6);
+        border: 1px solid rgba(0, 0, 0, 0.3);
+        border-radius: 4px;
+        padding: 4px;
+        outline: none;
+        color: wheat;
+        font-size: 1.1rem;
+        position: relative;
+        margin-top: 4px;
+    }
+
+    .Price::after {
+        content: "| KG";
+        position: absolute;
+        right: 3px;
+        top: 2px;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
 @{
-    ViewData["Title"] = "redigeraKundAuto";
+    <form asp-action="sparanyKund" method="post">
+        <div id="in">
+            <label for="realname">realname:</label>
+            <input type="text" id="realname" name="realname" required placeholder="Realname">
+        </div>
+        <div id="in">
+            <label for="username">username:</label>
+            <input type="text" id="username" name="username" required placeholder="Username">
+        </div>
+        <div id="in">
+            <label for="password">password:</label>
+            <input type="password" id="password" name="password" required placeholder="password">
+        </div>
+        <div id="in">
+            <label for="mail">mail:</label>
+            <input type="email" id="mail" name="mail" required placeholder="mail adress">
+        </div>
+        <div id="in">
+            <label for="phoneNr">Phone number:</label>
+            <input type="tel" id="phoneNr" name="phoneNr" required placeholder="Phone number">
+        </div>
+        <div id="in">
+            <label for="adress">Adress:</label>
+            <input type="text" id="adress" name="adress" required placeholder="Adress">
+        </div>
+        <div id="in">
+            <label for="age">age:</label>
+            <input type="number" id="age" name="age" required placeholder="age">
+        </div>
+        <div id="in">
+            <label for="balance">balance:</label>
+            <input type="number" id="balance" name="balance" required placeholder="balance">
+        </div>
+        <button type="submit">Confirm</button>
+    </form>
 }
-
-<h1>Kund</h1>
-
-<h2>ID: @Model.id</h2>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="redigeraKundAuto">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="realname" class="control-label"></label>
-                <input asp-for="realname" class="form-control" />
-                <span asp-validation-for="realname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="username" class="control-label"></label>
-                <input asp-for="username" class="form-control" />
-                <span asp-validation-for="username" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="mail" class="control-label"></label>
-                <input asp-for="mail" class="form-control" />
-                <span asp-validation-for="mail" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="age" class="control-label"></label>
-                <input asp-for="age" class="form-control" />
-                <span asp-validation-for="age" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    }

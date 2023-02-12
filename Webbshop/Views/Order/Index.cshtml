@@ -21,7 +21,6 @@
                 <td>orderDate:</td>
                 <td>purchasinglist:</td>
                 <td></td>
-                <td></td>
             </tr>
 
             @foreach (Order O in Model)
@@ -52,9 +51,6 @@
                                 }
                             </table>
                         </div>
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "redigeraOrder", "Order", new {id = @O.id})
                     </td>
                     <td>
                         @Html.ActionLink("Edit - Admin", "AdminRedigeraOrder", "Order", new {id = @O.id})

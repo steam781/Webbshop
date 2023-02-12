@@ -86,12 +86,12 @@
     <form asp-action="sparaOrder" method="post">
         <div id="in">
             <h2>ID:</h2>
-            <h1>@Model.id</h1>
+            <h2>@Model.id</h2>
         </div>
         <input type="hidden" name="id" value="@Model.id">
         <div id="in">
-            <label for="customer">Customer id:</label>
-            <input type="number" id="customer" name="customer" value="@Model.customer" required placeholder="Customer ID: @Model.customer.id / DOES NOT WORK">
+            <h2>Customer:</h2>
+            <h2>@Model.customer.id</h2>
         </div>
         <div id="in">
             <label for="orderStatus">Orderstatus:</label>

@@ -150,9 +150,8 @@ using System.Security.Cryptography;
         string conStr = "server=46.246.45.183;user=OliverEc;port=3306;database=OliverEc_DB;password=YROSBKEE";
 
         MySqlConnection conn = new MySqlConnection(conStr);
-        MySqlCommand MyCom = new MySqlCommand("UPDATE Orders set customer = @CUSTOMER, orderStatus = @STATUS, orderDate = @DATE, purchasinglist = @LIST where id = @ID ", conn);
+        MySqlCommand MyCom = new MySqlCommand("UPDATE Orders set orderStatus = @STATUS, orderDate = @DATE, purchasinglist = @LIST where id = @ID ", conn);
         MyCom.Parameters.AddWithValue("@ID", O.id);
-        MyCom.Parameters.AddWithValue("@CUSTOMER", O.customer);
         MyCom.Parameters.AddWithValue("@STATUS", O.orderStatus);
         MyCom.Parameters.AddWithValue("@DATE", O.orderDate);
         MyCom.Parameters.AddWithValue("@LIST", O.purchasinglist);
