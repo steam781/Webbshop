@@ -45,9 +45,9 @@ namespace Webbshop.Controllers
             }
             return View("Index", Order.getAllOrder());
         }
-        public IActionResult sparanyOrder(Order O, int produktID)
+        public IActionResult sparanyOrder(Order O)
         {
-            if (Order.sparanyOrder(O, produktID) == true)
+            if (Order.sparanyOrder(O) == true)
             {
                 ViewBag.Meddelande = "new order saved";
             }
