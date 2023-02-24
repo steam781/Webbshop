@@ -17,6 +17,7 @@
                 <td>mail:</td>
                 <td>id:</td>
                 <td></td>
+                <td></td>
             </tr>
 
             @foreach (Kund K in Model)
@@ -34,6 +35,9 @@
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "redigeraKund", "Kund", new {id = @K.id})
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "deleteKund", "Kund", new {id = @K.id}, new { onclick = "return confirm('Are you sure you want to delete?');" })
                     </td>
                 </tr>
                 

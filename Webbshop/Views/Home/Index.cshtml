@@ -1,8 +1,27 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using Microsoft.AspNetCore.Http // Import the HttpContext class
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@{
+    ViewData["Title"] = "Home Page";
+
+    string name = "";
+    string role = "";
+
+    if (Context.Session.GetString("name") != null)
+    {
+        name = Context.Session.GetString("name");
+        role = Context.Session.GetString("role");
+    }
+
+    <div class="text-center">
+        @if (!string.IsNullOrEmpty(name))
+        {
+            <h1 class="display-4">Welcome, @name!</h1>
+            <p>You are logged in as a @role.</p>
+        }
+        else
+        {
+            <h1 class="display-4">Welcome!</h1>
+            <p>Please log in to access your account.</p>
+        }
+    </div>
+}

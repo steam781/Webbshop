@@ -1,11 +1,17 @@
 ﻿@page
-@model Login
+@model Employee
 @{
     if (ViewData != null)
     {
         ViewData["Title"] = "Login";
     }
 }
+
+<style>
+    button {
+        margin-top: 20px;
+    }
+</style>
 
 <div class="container">
     <h1>Login</h1>
@@ -26,3 +32,11 @@
         </div>
     </div>
 </div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
