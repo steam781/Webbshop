@@ -16,17 +16,14 @@ namespace Webbshop.Controllers
             ModelState.Remove("name");
             ModelState.Remove("role");
 
-            if (!ModelState.IsValid)
-            {
-                return View("Index");
-            }
+            if (!ModelState.IsValid) return View("index");
 
             Employee nyBesökare = Employee.GetEmployeeByMail(emp.mailadress);
 
             // Check if password is correct
             if (nyBesökare.password != emp.password)
             {
-                ModelState.AddModelError("password", "Incorrect password");
+                ViewBag.MeddelandePass = "Incorect password";
                 return View("Index");
             }
 
