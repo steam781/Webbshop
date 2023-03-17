@@ -19,6 +19,15 @@
     <div class="row">
         <div class="col-md-6">
             <form asp-action="Login" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                @if (ViewBag.LoginError != null)
+                {
+                    <div class="form-group">
+                        <span class="text-danger">
+                            Användarnamn eller lösenord är felkatig!
+                        </span>
+                    </div>
+                }
                 <div class="form-group">
                     <label for="mailadress">Email address</label>
                     <input type="mailadress" class="form-control" id="mailadress" name="mailadress" />

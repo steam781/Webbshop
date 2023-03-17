@@ -23,7 +23,7 @@ namespace Webbshop.Controllers
             // Check if password is correct
             if (nyBesökare.password != emp.password)
             {
-                ViewBag.MeddelandePass = "Incorect password";
+                ViewBag.MeddelandePass = "Incorrect password";
                 return View("Index");
             }
 

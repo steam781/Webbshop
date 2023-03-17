@@ -14,10 +14,20 @@ namespace Webbshop.Controllers
         }
         public IActionResult newKund()
         {
+            string roll = HttpContext.Session.GetString("roll");
+            if (roll == null || !roll.Contains("admin"))
+            {
+                return View("NotAllowed");
+            }
             return View();
         }
         public IActionResult redigeraKund(int id)
         {
+            string roll = HttpContext.Session.GetString("roll");
+            if (roll == null || !roll.Contains("admin"))
+            {
+                return View("NotAllowed");
+            }
             Kund k = Kund.getSingleKundById(id);
 
             return View(k);
@@ -25,11 +35,22 @@ namespace Webbshop.Controllers
         }
         public IActionResult sparaKund(Kund k)
         {
+            string roll = HttpContext.Session.GetString("roll");
+            if (roll == null || !roll.Contains("admin"))
+            {
+                return View("NotAllowed");
+            }
+
             Kund.sparaKund(k);
             return View("Index", Kund.getAllKund());
         }
         public IActionResult sparanyKund(Kund k)
         {
+            string roll = HttpContext.Session.GetString("roll");
+            if (roll == null || !roll.Contains("admin"))
+            {
+                return View("NotAllowed");
+            }
             if (Kund.sparanyKund(k) == true)
             {
                 ViewBag.Meddelande = "new customer saved";
@@ -42,6 +63,11 @@ namespace Webbshop.Controllers
         }
         public IActionResult deleteKund(Kund k)
         {
+            string roll = HttpContext.Session.GetString("roll");
+            if (roll == null || !roll.Contains("admin"))
+            {
+                return View("NotAllowed");
+            }
             if (Kund.deleteKund(k) == true)
             {
                 ViewBag.Meddelande = "Customer removed";
